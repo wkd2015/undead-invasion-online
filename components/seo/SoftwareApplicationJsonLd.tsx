@@ -4,6 +4,7 @@ type SoftwareApplicationJsonLdProps = {
   name: string;
   description: string;
   applicationCategory?: string;
+  contentRating?: string;
 };
 
 /**
@@ -13,6 +14,7 @@ export function SoftwareApplicationJsonLd({
   name,
   description,
   applicationCategory = "Game",
+  contentRating,
 }: SoftwareApplicationJsonLdProps) {
   const url = getSiteUrl();
   const data = {
@@ -28,6 +30,7 @@ export function SoftwareApplicationJsonLd({
       priceCurrency: "USD",
     },
     url,
+    ...(contentRating ? { contentRating } : {}),
   };
 
   return (
