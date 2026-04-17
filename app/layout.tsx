@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/react";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ConditionalAnalytics } from "@/components/analytics/ConditionalAnalytics";
 import { getSiteUrl } from "@/lib/site";
@@ -61,6 +62,7 @@ export default function RootLayout({
       <body className="flex min-h-full flex-col bg-zinc-950 font-sans text-zinc-50">
         {children}
         <ConditionalAnalytics />
+        <Analytics />
       </body>
     </html>
   );
