@@ -16,26 +16,34 @@ const geistMono = Geist_Mono({
 });
 
 const siteUrl = getSiteUrl();
-const defaultTitle = "Undead Invasion — Play free online in your browser";
+const defaultTitle = "Undead Invasion Online — Free HTML5 Zombie Survival Shooter";
 const defaultDescription =
-  "Play Undead Invasion free in your browser—fullscreen-ready iframe above the fold, mobile-first, with guides, how-to, FAQs, and quick start. Jump in now.";
+  "Play Undead Invasion Online free in your browser—wave-based zombie survival with guns, traps, barricades, and permadeath runs. HTML5, no install, mobile-friendly.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
     default: defaultTitle,
-    template: "%s | Undead Invasion",
+    template: "%s | Undead Invasion Online",
   },
   description: defaultDescription,
-  alternates: {
-    canonical: "/",
-  },
+  applicationName: "Undead Invasion Online",
+  keywords: [
+    "Undead Invasion Online",
+    "Undead Invasion",
+    "zombie survival game",
+    "browser zombie shooter",
+    "HTML5 survival game",
+    "wave defense game",
+    "play Undead Invasion unblocked",
+    "free online zombie game",
+  ],
   openGraph: {
     type: "website",
-    url: "/",
+    url: `${siteUrl}/`,
     title: defaultTitle,
     description: defaultDescription,
-    siteName: "Undead Invasion",
+    siteName: "Undead Invasion Online",
     locale: "en_US",
   },
   twitter: {
@@ -59,6 +67,9 @@ export default function RootLayout({
       lang="en"
       className={`dark ${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <head>
+        <link rel="canonical" href={`${siteUrl}/`} />
+      </head>
       <body className="flex min-h-full flex-col bg-zinc-950 font-sans text-zinc-50">
         {children}
         <ConditionalAnalytics />

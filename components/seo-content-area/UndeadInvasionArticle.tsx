@@ -16,6 +16,7 @@ import {
   Timer,
   Trophy,
 } from "lucide-react";
+import { FAQ_ITEMS } from "@/components/seo-content-area/faqItems";
 
 /* ------------------------------------------------------------------ */
 /*  Tiny presentational helpers — keep the article readable            */
@@ -90,24 +91,24 @@ export function UndeadInvasionArticle() {
       <SectionCard>
         <div className="space-y-4">
           <H2 id="h2-what" icon={Skull} iconColor="text-rose-400">
-            What Is Undead Invasion?
+            What Is Undead Invasion Online?
           </H2>
           <p>
-            Undead Invasion is a pixel-styled, side-scrolling survival shooter that
+            Undead Invasion Online is a pixel-styled, side-scrolling survival shooter that
             blends fast zombie combat with light defense-building decisions. Published for modern browsers and
             mobile-friendly HTML5 players, it drops you into a lonely post-apocalyptic lane where each day
             escalates the pressure: more zombies, tougher mixes of enemy types, and fewer excuses to waste
             resources. If you are searching for Undead Invasion unblocked access at school or on a locked-down
-            network, the HTML5 build is designed to load quickly without installs, which makes it a practical
-            pick for short sessions when you still want a high-skill ceiling.
+            network, the HTML5 build of Undead Invasion Online is designed to load quickly without installs,
+            which makes it a practical pick for short sessions when you still want a high-skill ceiling.
           </p>
           <p>
             The fantasy is intentionally grim: you are not escorting VIPs or solving puzzles between waves—you
             are holding a shrinking perimeter with guns, traps, barricades, and whatever coins you managed to
-            bank. That clarity is why Undead Invasion works as a pick-up-and-play browser game while still
-            rewarding players who learn weapon cadence, reload windows, and defensive geometry across multiple
-            runs. The tone matches the mechanics: mistakes are loud, health bars move fast, and the economy
-            between waves forces you to commit to a build instead of hoarding forever.
+            bank. That clarity is why Undead Invasion Online works as a pick-up-and-play browser game while
+            still rewarding players who learn weapon cadence, reload windows, and defensive geometry across
+            multiple runs. The tone matches the mechanics: mistakes are loud, health bars move fast, and the
+            economy between waves forces you to commit to a build instead of hoarding forever.
           </p>
         </div>
       </SectionCard>
@@ -119,8 +120,8 @@ export function UndeadInvasionArticle() {
             Core Survival Loop: Waves, Coins, and Permadeath
           </H2>
           <p>
-            Every session of Undead Invasion is built around a simple loop that is easy to explain but hard to
-            master. You fight through a wave, collect coins from eliminations and from surviving the full day,
+            Every session of Undead Invasion Online is built around a simple loop that is easy to explain but
+            hard to master. You fight through a wave, collect coins from eliminations and from surviving the full day,
             then immediately reinvest that income before the next assault. Stronger firearms, healing items,
             barricades, traps, and utility gear all compete for the same wallet, so each purchase is a bet on
             what the next wave will demand. Portal descriptions consistently emphasize that zombies become more
@@ -156,10 +157,10 @@ export function UndeadInvasionArticle() {
       <SectionCard>
         <div className="space-y-5">
           <H2 id="h2-how" icon={Keyboard} iconColor="text-emerald-400">
-            How to Play Undead Invasion
+            How to Play Undead Invasion Online (Gameplay Guide)
           </H2>
           <p>
-            If your goal is to start Undead Invasion online free in a browser tab, the onboarding is
+            If your goal is to start Undead Invasion Online free in a browser tab, the onboarding is
             intentionally light: you move, you shoot, you spend currency between waves. The depth arrives when
             those basics collide with crowd control, ammo economy, and defensive placement. Public control
             lists vary slightly by portal, so treat the following as a practical superset—test each input on
@@ -216,10 +217,11 @@ export function UndeadInvasionArticle() {
       <SectionCard>
         <div className="space-y-5">
           <H2 id="h2-weapons" icon={Swords} iconColor="text-rose-300">
-            Weapons, Items, and Build Variety
+            Weapon Upgrade System: Firearms, Melee, and Tactical Gear
           </H2>
           <p>
-            Official marketing pages confirm broad categories rather than a complete public loot table:
+            The Undead Invasion Online weapon upgrade system organises loot into broad categories rather than
+            a complete public loot table:
             firearms, melee weapons, grenades or bombs, health items, traps, and barricades or structures.
             Third-party guides add color by listing archetypes—rifles, shotguns, machine guns, pistols, and
             snipers on the ranged side; bats, axes, katanas, chainsaws, and special blades on the melee side.
@@ -295,7 +297,7 @@ export function UndeadInvasionArticle() {
       <SectionCard>
         <div className="space-y-4">
           <H2 id="h2-tactics" icon={Target} iconColor="text-amber-300">
-            Survival Tactics for Longer Runs
+            Survival Strategy: Tactics for Longer Undead Invasion Online Runs
           </H2>
 
           <ul className="space-y-2 text-sm text-zinc-300" role="list">
@@ -314,7 +316,7 @@ export function UndeadInvasionArticle() {
           </ul>
 
           <p>
-            Long runs come from stacking small advantages. Undead Invasion escalates
+            Long runs in Undead Invasion Online come from stacking small advantages. The spawn curve escalates
             faster than most players upgrade if they skip traps entirely. When portals describe Playground
             Mode as a low-pressure practice space, use it to internalize weapon timings without risking a full
             permadeath streak. That mode is also where you can answer curiosity questions—how does this shotgun
@@ -330,7 +332,7 @@ export function UndeadInvasionArticle() {
             HTML5, Unblocked Access, and Browser Play
           </H2>
           <p>
-            Undead Invasion is commonly described as a gritty HTML5 survival shooter, which is why it appears on
+            Undead Invasion Online is commonly described as a gritty HTML5 survival shooter, which is why it appears on
             aggregator portals advertising unblocked access for schools and shared PCs. The practical upside is
             predictable: no installer, no admin prompts, and a control scheme that fits keyboard-first play.
             Performance still matters—close background tabs, prefer wired mice for tracking, and allow the
@@ -385,45 +387,24 @@ export function UndeadInvasionArticle() {
           </H2>
 
           <div className="divide-y divide-zinc-800/60 rounded-lg border border-zinc-700/50 bg-zinc-800/20">
-            <details className="group px-5 py-4" open>
-              <summary className="flex cursor-pointer list-none items-center gap-2 text-lg font-semibold text-zinc-100 [&::-webkit-details-marker]:hidden">
-                <Fingerprint className="size-4 shrink-0 text-rose-400/70" aria-hidden />
-                <h3 id="h3-faq-free" className="inline">Is Undead Invasion free in the browser?</h3>
-                <span className="ml-auto text-xs text-zinc-500 transition-transform group-open:rotate-90">▶</span>
-              </summary>
-              <p className="mt-3 text-sm">
-                Yes—Undead Invasion is widely distributed as a free-to-play browser experience with optional host
-                ads around the frame. You still pay with attention and time, but there is no mandatory install gate
-                for the base loop described across portals.
-              </p>
-            </details>
-
-            <details className="group px-5 py-4">
-              <summary className="flex cursor-pointer list-none items-center gap-2 text-lg font-semibold text-zinc-100 [&::-webkit-details-marker]:hidden">
-                <Fingerprint className="size-4 shrink-0 text-rose-400/70" aria-hidden />
-                <h3 id="h3-faq-plugin" className="inline">Do I need to install a plugin?</h3>
-                <span className="ml-auto text-xs text-zinc-500 transition-transform group-open:rotate-90">▶</span>
-              </summary>
-              <p className="mt-3 text-sm">
-                Modern builds target HTML5, which means your evergreen browser handles audio, rendering, and input
-                without Flash-era plugins. If a network blocks game domains, that is a policy issue rather than a
-                missing extension.
-              </p>
-            </details>
-
-            <details className="group px-5 py-4">
-              <summary className="flex cursor-pointer list-none items-center gap-2 text-lg font-semibold text-zinc-100 [&::-webkit-details-marker]:hidden">
-                <Fingerprint className="size-4 shrink-0 text-rose-400/70" aria-hidden />
-                <h3 id="h3-faq-death" className="inline">What happens when I die in a run?</h3>
-                <span className="ml-auto text-xs text-zinc-500 transition-transform group-open:rotate-90">▶</span>
-              </summary>
-              <p className="mt-3 text-sm">
-                Runs reset without checkpoints. You keep knowledge—spawn habits, upgrade paths, trap synergies—even
-                if the world state snaps back to day one. That loop is why Undead Invasion belongs to the &ldquo;one
-                more run&rdquo; family: each failure is a lesson priced in minutes, not a soft story checkpoint that
-                hands you victory anyway.
-              </p>
-            </details>
+            {FAQ_ITEMS.map((item, index) => (
+              <details
+                key={item.id}
+                className="group px-5 py-4"
+                {...(index === 0 ? { open: true } : {})}
+              >
+                <summary className="flex cursor-pointer list-none items-center gap-2 text-lg font-semibold text-zinc-100 [&::-webkit-details-marker]:hidden">
+                  <Fingerprint className="size-4 shrink-0 text-rose-400/70" aria-hidden />
+                  <h3 id={item.id} className="inline">
+                    {item.question}
+                  </h3>
+                  <span className="ml-auto text-xs text-zinc-500 transition-transform group-open:rotate-90">
+                    ▶
+                  </span>
+                </summary>
+                <p className="mt-3 text-sm">{item.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </SectionCard>
