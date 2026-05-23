@@ -2,24 +2,16 @@ import { Crosshair, Gamepad2, ShieldAlert, Skull } from "lucide-react";
 import { GameContainer } from "@/components/game-container/GameContainer";
 import { RelatedGames } from "@/components/related-games/RelatedGames";
 import { SeoContentArea } from "@/components/seo-content-area/SeoContentArea";
-import { FAQ_ITEMS } from "@/components/seo-content-area/faqItems";
-import { FaqPageJsonLd } from "@/components/seo/FaqPageJsonLd";
-import { SoftwareApplicationJsonLd } from "@/components/seo/SoftwareApplicationJsonLd";
+import { VideoGameJsonLd } from "@/components/seo/VideoGameJsonLd";
 import { Badge } from "@/components/ui/badge";
 
 export default function HomePage() {
   return (
     <>
-      <SoftwareApplicationJsonLd
+      <VideoGameJsonLd
         name="Undead Invasion Online"
         description="Undead Invasion Online is a free HTML5 browser zombie survival shooter with wave-based combat, coin-driven upgrades, traps, barricades, and permadeath runs."
         contentRating="Teen (13+) — stylized blood and gore"
-      />
-      <FaqPageJsonLd
-        items={FAQ_ITEMS.map((item) => ({
-          question: item.question,
-          answer: item.answer,
-        }))}
       />
       <div className="relative min-h-screen flex-1 overflow-hidden bg-[radial-gradient(1200px_600px_at_50%_-10%,rgba(244,63,94,0.12),transparent),radial-gradient(900px_500px_at_80%_20%,rgba(124,58,237,0.14),transparent),linear-gradient(180deg,#09090b_0%,#020617_55%,#020617_100%)] text-zinc-50">
         <div className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-10 px-4 py-8 sm:px-6 lg:gap-12 lg:px-8">

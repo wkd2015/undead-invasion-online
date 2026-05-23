@@ -126,7 +126,6 @@ export function GameContainer() {
               title="Undead Invasion"
               src={src}
               className="h-full w-full touch-manipulation rounded-lg bg-black"
-              loading="lazy"
               allowFullScreen
               allow="fullscreen; autoplay; gamepad"
               referrerPolicy="strict-origin-when-cross-origin"

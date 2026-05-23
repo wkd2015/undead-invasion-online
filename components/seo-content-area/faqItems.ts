@@ -1,6 +1,6 @@
 /**
  * 首页 FAQ 条目数据源。
- * 同时被 UndeadInvasionArticle（页面可见内容）与 FaqPageJsonLd（结构化数据）消费，确保两者完全一致。
+ * 被 UndeadInvasionArticle 消费，用于页面可见 FAQ 内容。
  */
 export type FaqItem = {
   id: string;
