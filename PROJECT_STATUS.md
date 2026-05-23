@@ -4,7 +4,7 @@ Last updated: 2026-05-24
 
 ## Current Stage
 
-Technical SEO recovery in progress. The focus is canonical redirect correctness, structured-data cleanup, and preserving the existing playable-first game experience.
+Technical SEO recovery deployed with one remaining Vercel domain-level redirect setting to fix. The page-level canonical metadata and structured data are now aligned with the browser game site rules.
 
 ## Completed
 
@@ -17,17 +17,20 @@ Technical SEO recovery in progress. The focus is canonical redirect correctness,
 - Replaced `SoftwareApplication`/`FAQPage` JSON-LD with a visible-content-aligned `VideoGame` JSON-LD component.
 - Kept visible FAQ content, but removed FAQPage schema eligibility risk.
 - Removed lazy loading from the primary game iframe so the playable area loads sooner.
+- Passed local `npm run lint` and `npm run build` on 2026-05-24.
+- Committed and pushed `1c87a0a` (`修复规范域名和游戏结构化数据`) to GitHub on 2026-05-24.
+- Verified production on 2026-05-24:
+  - `https://www.undeadinvasiononline.com/` returns 200.
+  - Homepage HTML canonical points to `https://www.undeadinvasiononline.com/`.
+  - Homepage JSON-LD now uses `VideoGame`.
+  - No `FAQPage` or `SoftwareApplication` JSON-LD is present in the production homepage HTML.
+  - `https://www.undeadinvasiononline.com/sitemap.xml` lists the canonical `www` homepage.
+- Remaining issue: `https://undeadinvasiononline.com/` still returns 307 to `https://www.undeadinvasiononline.com/`. This is a Vercel project-domain redirect setting, not the deployed Next app route, because the redirect happens before requests reach the application.
 
 ## Next Actions
 
-- Run local `lint` and production build.
-- Commit and push the optimization branch to trigger deployment.
-- Verify production behavior:
-  - `https://www.undeadinvasiononline.com/` returns 200.
-  - `https://undeadinvasiononline.com/` redirects permanently with 301/308.
-  - Homepage JSON-LD contains `VideoGame` only, with no `FAQPage` or `SoftwareApplication`.
-  - `robots.txt` and `sitemap.xml` remain accessible and canonical.
-- If production still returns 307 after deployment, fix the Vercel domain redirect setting for this project.
+- Update the Vercel project-domain setting for `undeadinvasiononline.com` so the redirect to `www.undeadinvasiononline.com` uses 308 instead of 307.
+- If using the Vercel REST API, update project `undead-invasion-online` domain `undeadinvasiononline.com` with `redirectStatusCode: 308`.
 - Request GSC validation for the auto-redirect issue after the permanent redirect is confirmed.
 
 ## SEO Notes
@@ -38,7 +41,7 @@ Technical SEO recovery in progress. The focus is canonical redirect correctness,
 
 ## Risks
 
-- Existing Vercel domain-level redirect behavior may override framework redirects.
+- Existing Vercel domain-level redirect behavior currently overrides framework redirects and still returns 307.
 - Clarity shows low average scroll and bot-heavy sessions, so future content changes should be measured against real-user sessions.
 - External iframe stability remains a dependency.
 
