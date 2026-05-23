@@ -4,7 +4,7 @@ Last updated: 2026-05-24
 
 ## Current Stage
 
-Technical SEO recovery deployed with one remaining Vercel domain-level redirect setting to fix. The page-level canonical metadata and structured data are now aligned with the browser game site rules.
+Technical SEO recovery deployed and verified. The page-level canonical metadata, structured data, and apex-to-`www` permanent redirect are now aligned with the browser game site rules.
 
 ## Completed
 
@@ -25,13 +25,15 @@ Technical SEO recovery deployed with one remaining Vercel domain-level redirect 
   - Homepage JSON-LD now uses `VideoGame`.
   - No `FAQPage` or `SoftwareApplication` JSON-LD is present in the production homepage HTML.
   - `https://www.undeadinvasiononline.com/sitemap.xml` lists the canonical `www` homepage.
-- Remaining issue: `https://undeadinvasiononline.com/` still returns 307 to `https://www.undeadinvasiononline.com/`. This is a Vercel project-domain redirect setting, not the deployed Next app route, because the redirect happens before requests reach the application.
+- Verified on 2026-05-24 after the Vercel project-domain setting was updated:
+  - `https://undeadinvasiononline.com/` now returns 308 to `https://www.undeadinvasiononline.com/`.
+  - `https://www.undeadinvasiononline.com/` returns 200.
+  - `https://www.undeadinvasiononline.com/sitemap.xml` returns 200.
 
 ## Next Actions
 
-- Update the Vercel project-domain setting for `undeadinvasiononline.com` so the redirect to `www.undeadinvasiononline.com` uses 308 instead of 307.
-- If using the Vercel REST API, update project `undead-invasion-online` domain `undeadinvasiononline.com` with `redirectStatusCode: 308`.
 - Request GSC validation for the auto-redirect issue after the permanent redirect is confirmed.
+- Observe GSC indexing, query, and mobile/desktop impression changes for 7-14 days before content expansion.
 
 ## SEO Notes
 
@@ -41,7 +43,7 @@ Technical SEO recovery deployed with one remaining Vercel domain-level redirect 
 
 ## Risks
 
-- Existing Vercel domain-level redirect behavior currently overrides framework redirects and still returns 307.
+- Historical 307/redirect reports in GSC may take days to clear after validation starts.
 - Clarity shows low average scroll and bot-heavy sessions, so future content changes should be measured against real-user sessions.
 - External iframe stability remains a dependency.
 
