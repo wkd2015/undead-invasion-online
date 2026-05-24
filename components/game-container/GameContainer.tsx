@@ -1,6 +1,6 @@
 "use client";
 
-import { Maximize2, Sprout, TreeDeciduous } from "lucide-react";
+import { Maximize2, RefreshCcw, Sprout, TreeDeciduous } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -18,8 +18,13 @@ function getIframeSrc(): string {
  */
 export function GameContainer() {
   const src = getIframeSrc();
+  const frameShellRef = useRef<HTMLElement>(null);
+  const iframeRef = useRef<HTMLIFrameElement>(null);
   const [overlayVisible, setOverlayVisible] = useState(true);
   const [progress, setProgress] = useState(6);
+  const [reloadKey, setReloadKey] = useState(0);
+  const [showSlowLoadHelp, setShowSlowLoadHelp] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("Game frame is loading.");
   const reduceMotionRef = useRef(false);
   const tickRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -44,27 +49,76 @@ export function GameContainer() {
     };
   }, [overlayVisible]);
 
+  useEffect(() => {
+    if (!overlayVisible) return;
+    const timer = window.setTimeout(() => setShowSlowLoadHelp(true), 3500);
+    return () => window.clearTimeout(timer);
+  }, [overlayVisible, reloadKey]);
+
   const finishLoading = useCallback(() => {
     if (tickRef.current) {
       clearInterval(tickRef.current);
       tickRef.current = null;
     }
     setProgress(100);
+    setShowSlowLoadHelp(false);
+    setStatusMessage("Game frame loaded. Click inside to focus controls.");
     window.setTimeout(
       () => setOverlayVisible(false),
       reduceMotionRef.current ? 80 : 420,
     );
   }, []);
 
+  const reloadGame = useCallback(() => {
+    if (tickRef.current) {
+      clearInterval(tickRef.current);
+      tickRef.current = null;
+    }
+    setProgress(6);
+    setOverlayVisible(true);
+    setShowSlowLoadHelp(false);
+    setStatusMessage("Reloading the game frame.");
+    setReloadKey((key) => key + 1);
+  }, []);
+
+  const enterFullscreen = useCallback(async () => {
+    const iframe = iframeRef.current;
+    const shell = frameShellRef.current;
+    const primaryTarget = shell ?? iframe;
+    const fallbackTarget = primaryTarget === shell ? iframe : shell;
+
+    if (!primaryTarget?.requestFullscreen) {
+      setStatusMessage("Fullscreen is not available in this browser.");
+      return;
+    }
+
+    try {
+      await primaryTarget.requestFullscreen();
+      setStatusMessage("Fullscreen requested. Press Esc to leave fullscreen.");
+    } catch {
+      try {
+        if (fallbackTarget && fallbackTarget !== primaryTarget && fallbackTarget.requestFullscreen) {
+          await fallbackTarget.requestFullscreen();
+          setStatusMessage("Fullscreen requested. Press Esc to leave fullscreen.");
+          return;
+        }
+      } catch {
+        // Fall through to the visible browser-blocked message below.
+      }
+      setStatusMessage("Fullscreen was blocked. Click inside the game frame and try again.");
+    }
+  }, []);
+
   const treeScale = 0.35 + (Math.min(progress, 100) / 100) * 0.85;
 
   return (
     <section
-      className="relative isolate w-full max-w-5xl scroll-mt-4"
+      ref={frameShellRef}
+      className="game-player-shell relative isolate w-full max-w-5xl scroll-mt-4"
       aria-label="Undead Invasion game player"
     >
       <div className="pointer-events-none absolute -inset-1 rounded-2xl bg-gradient-to-br from-rose-600/35 via-violet-600/25 to-emerald-500/20 blur-md" />
-      <div className="relative overflow-hidden rounded-2xl border border-zinc-700/80 bg-gradient-to-b from-zinc-900 to-zinc-950 p-2 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.75)] ring-1 ring-rose-950/40">
+      <div className="game-player-card relative overflow-hidden rounded-2xl border border-zinc-700/80 bg-gradient-to-b from-zinc-900 to-zinc-950 p-2 shadow-[0_24px_80px_-12px_rgba(0,0,0,0.75)] ring-1 ring-rose-950/40">
         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800/80 px-2 pb-3">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-medium uppercase tracking-wide text-zinc-400">
@@ -74,23 +128,35 @@ export function GameContainer() {
               4:3 theater
             </Badge>
           </div>
-          <Button
-            type="button"
-            variant="outline"
-            size="sm"
-            className="pointer-events-auto h-8 gap-1 border-zinc-600 bg-zinc-900/80 text-xs text-zinc-100 hover:bg-zinc-800"
-            onClick={() => {
-              const el = document.getElementById("undead-invasion-frame") as HTMLIFrameElement | null;
-              el?.requestFullscreen?.();
-            }}
-          >
-            <Maximize2 className="size-3.5" aria-hidden />
-            Fullscreen
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="pointer-events-auto h-8 gap-1 border-zinc-600 bg-zinc-900/80 text-xs text-zinc-100 hover:bg-zinc-800"
+              onClick={reloadGame}
+            >
+              <RefreshCcw className="size-3.5" aria-hidden />
+              Reload
+            </Button>
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              className="pointer-events-auto h-8 gap-1 border-zinc-600 bg-zinc-900/80 text-xs text-zinc-100 hover:bg-zinc-800"
+              onClick={enterFullscreen}
+            >
+              <Maximize2 className="size-3.5" aria-hidden />
+              Fullscreen
+            </Button>
+          </div>
         </div>
+        <p className="px-2 pb-2 pt-1 text-xs text-zinc-400" aria-live="polite">
+          {statusMessage}
+        </p>
 
         <div className="relative mx-auto w-full max-w-4xl px-1 pb-2 pt-1">
-          <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-black shadow-inner ring-1 ring-black/60">
+          <div className="game-player-frame relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-black shadow-inner ring-1 ring-black/60">
             {overlayVisible ? (
               <div
                 className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-5 bg-zinc-950/92 px-6 text-center backdrop-blur-sm transition-opacity duration-300"
@@ -118,11 +184,25 @@ export function GameContainer() {
                     Tip: click inside the frame once if keyboard controls feel unresponsive.
                   </p>
                 </div>
+                {showSlowLoadHelp ? (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    className="border-emerald-500/50 bg-emerald-950/50 text-emerald-100 hover:bg-emerald-900/60"
+                    onClick={reloadGame}
+                  >
+                    <RefreshCcw className="size-3.5" aria-hidden />
+                    Retry loading
+                  </Button>
+                ) : null}
               </div>
             ) : null}
 
             <iframe
+              key={reloadKey}
               id="undead-invasion-frame"
+              ref={iframeRef}
               title="Undead Invasion"
               src={src}
               className="h-full w-full touch-manipulation rounded-lg bg-black"

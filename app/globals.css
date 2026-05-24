@@ -128,3 +128,24 @@
     @apply font-sans;
   }
 }
+
+.game-player-shell:fullscreen {
+  width: 100vw;
+  height: 100vh;
+  max-width: none;
+  overflow: auto;
+  padding: 12px;
+  background: #020617;
+}
+
+.game-player-shell:fullscreen .game-player-card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+}
+
+.game-player-shell:fullscreen .game-player-frame {
+  min-height: 0;
+  flex: 1;
+  aspect-ratio: auto;
+}
